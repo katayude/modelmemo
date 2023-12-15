@@ -1,9 +1,12 @@
 import React from 'react';
+import Sidemenue from '@/app/components/Sidemenue';
+import Mainmenue from '@/app/components/Mainmenue';
 
 const Page: React.FC = () => {
     return (
         <div>
-            <h1>Hello, World!</h1>
+            <Sidemenue />
+            <Mainmenue />
         </div>
     );
 };
