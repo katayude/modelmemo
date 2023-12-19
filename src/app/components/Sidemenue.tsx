@@ -5,10 +5,20 @@ const Sidemenue: React.FC = () => {
         <div>
             <nav>
                 <ul>
-                    <li id="01"></li>
-                    <li id="02"><span>aaa</span><span>今いる場所</span></li>
-                    <li id="03"><a href="images">画像一覧</a></li>
-                    <li id="03"><a href="3dmodels">３Dモデル</a></li>
+                    <li id="01">
+                    </li>
+                    <li id="02">
+                        <span>aaa</span>
+                        <span>今いる場所</span>
+                    </li>
+                    <li id="03">
+                        <span><img src="/images/logo.png" alt="*" /></span>
+                        <span>あいうえお</span>
+                    </li>
+                    <li id="03">
+                        <span><img src="#" alt="#" /></span>
+                        <span></span>
+                    </li>
                 </ul>
             </nav>
         </div>
