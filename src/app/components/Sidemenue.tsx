@@ -29,9 +29,6 @@ const Sidemenue: React.FC = () => {
                         </a>
                     </ul>
                 </div>
-                <div className="outer">
-                    <img src="/images/logo.png" alt="#" width={90} height={90} />
-                </div>
             </nav>
         </div>
     );

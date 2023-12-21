@@ -1,7 +1,3 @@
-.a {
-    padding: 0px;
-}
-
 .nav {
     display: block;
     position: fixed;
@@ -33,7 +29,7 @@
 }
 
 .outer {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     right: 0;
 }
