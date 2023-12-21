@@ -1,0 +1,39 @@
+.a {
+    padding: 0px;
+}
+
+.nav {
+    display: block;
+    position: fixed;
+    background-color: #BBBBBB;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+}
+
+.inner {
+    margin: 0;
+    padding: 0;
+}
+
+.dir {
+    margin: 0;
+    padding: 20px;
+}
+
+.link {
+    display: flex;
+    margin: 5px;
+    padding: 20px;
+    font-size: 20px;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+.outer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
