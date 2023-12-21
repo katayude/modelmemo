@@ -10,7 +10,9 @@ type HeaderProps = {
 const Header: React.FC<HeaderProps> = ({ title }) => {
     return (
         <header style={headerStyle}>
-            <Image src="/images/logo.png" alt="logo" width="100" height="100" />
+            <a href="/homepage">
+                <Image src="/images/logo.png" alt="logo" width="100" height="100" />
+            </a>
             <h1 style={titleStyle}>{title}</h1>
             <nav>
                 <ul style={listStyle}>
