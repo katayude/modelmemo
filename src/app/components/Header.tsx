@@ -22,7 +22,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
                         </Link>
                     </li>
                     <li style={itemStyle}>
-                        <Link href="/">
+                        <Link href="/product_home">
                             PRODUCTS
                         </Link>
                     </li>
