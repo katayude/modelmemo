@@ -1,0 +1,13 @@
+.topmenue {
+    padding: 0;
+}
+
+.model {
+    padding: 0;
+    position: absolute;
+    top: 80px;
+    left: 50px;
+
+    border-width: 5px;
+    border-color: black;
+}

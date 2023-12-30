@@ -18,8 +18,8 @@ const Page: React.FC = () => {
 
         //size
         const sizes = {
-            width: innerWidth,
-            height: innerHeight
+            width: 1300,
+            height: 700
         };
 
         //renderer
@@ -48,7 +48,7 @@ const Page: React.FC = () => {
         //load 3d model
         const loader = new GLTFLoader();
         loader.load(
-            '/3dModel/rikei.glb',
+            '/3dModel/board.glb',
             function (gltf) {
                 scene.add(gltf.scene);
 
@@ -83,14 +83,6 @@ const Page: React.FC = () => {
             renderer.render(scene, camera);
         }
         tick()
-        window.addEventListener('resize', () => {
-            sizes.width = window.innerWidth
-            sizes.height = window.innerHeight
-            camera.aspect = sizes.width / sizes.height
-            camera.updateProjectionMatrix()
-            renderer.setSize(sizes.width, sizes.height)
-            renderer.setPixelRatio(window.devicePixelRatio)
-        });
 
     }, [])
     return (
