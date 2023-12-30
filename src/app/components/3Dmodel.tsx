@@ -18,8 +18,8 @@ const Page: React.FC = () => {
 
         //size
         const sizes = {
-            width: 1300,
-            height: 700
+            width: window.innerWidth * 0.6,
+            height: window.innerHeight * 0.6
         };
 
         //renderer
@@ -83,6 +83,14 @@ const Page: React.FC = () => {
             renderer.render(scene, camera);
         }
         tick()
+        window.addEventListener('resize', () => {
+            sizes.width = window.innerWidth * 0.6
+            sizes.height = window.innerHeight * 0.6
+            camera.aspect = sizes.width / sizes.height
+            camera.updateProjectionMatrix()
+            renderer.setSize(sizes.width, sizes.height)
+            renderer.setPixelRatio(window.devicePixelRatio)
+        });
 
     }, [])
     return (

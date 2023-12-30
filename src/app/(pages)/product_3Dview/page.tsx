@@ -10,8 +10,19 @@ const App: React.FC = () => {
                 <Topmenue />
             </div>
 
-            <div className={styles.model}>
-                <Model />
+            <div className={styles.contents}>
+                <div className={styles.model}>
+                    <span><Model /></span>
+                </div>
+                {/* 画像を矢印に差し替える */}
+                <div className={styles.arrows}>
+                    <img className={styles.img} src="/images/return.png" alt="*" />
+                    <img className={styles.img} src="/images/return.png" alt="*" />
+                </div>
+                {/* 画像一覧を表示する */}
+                <div className="images">
+                </div>
+
             </div>
         </>
     );
