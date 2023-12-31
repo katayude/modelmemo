@@ -1,11 +1,17 @@
 import React from 'react';
+import Page from '@/app/components/3Dmodel'; // 3Dグラフィックスを表示するコンポーネント
+import Sidemenue from '@/app/components/Sidemenue'; // サイドメニューを表示するコンポーネント
 
-const Page: React.FC = () => {
+
+const App: React.FC = () => {
     return (
-        <div>
-            <h1>Hello, World!</h1>
+        <div className="app-container">
+            <Sidemenue />
+            <Page />
         </div>
     );
 };
 
-export default Page;
+export default App;
+
+
