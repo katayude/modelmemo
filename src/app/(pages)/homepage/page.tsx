@@ -9,17 +9,17 @@ const Page: React.FC = () => {
     return (
         <div>
             <div>
-                <Header title="this is header" />
+                <Header title="MODELMEMO" />
             </div>
             <div className={styles.container}>
-                <div className={styles.heroimage}>
-                    <img src="/images/heroimage.png" alt="*" width="70%" />
+                <div className={styles.heroimage} id="#products">
+                    <img src="/images/remake_heroimage.png" alt="*" width="70%" />
                 </div>
-                <div className={styles.about}>
+                <div className={styles.about} id="about">
                     <p>ABOUT</p>
-                    <img src="/images/about.png" alt="*" width="70%" />
+                    <img src="/images/remake_about.png" alt="*" width="70%" />
                 </div>
-                <div className={styles.members}>
+                <div className={styles.members} id="members">
                     <p>MEMBERS</p>
                     <div className={styles.membersBox}>
                         <div className={styles.member}>

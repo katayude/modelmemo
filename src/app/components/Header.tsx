@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link'
 import Image from 'next/image';
+import { ClientReferenceManifestPlugin } from 'next/dist/build/webpack/plugins/flight-manifest-plugin';
 
 type HeaderProps = {
     title: string; // ヘッダーのタイトル
@@ -17,19 +18,13 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
             <nav>
                 <ul style={listStyle}>
                     <li style={itemStyle}>
-                        <Link href="/">
-                            ABOUT
-                        </Link>
+                        <a href="#about">ABOUT</a>
                     </li>
                     <li style={itemStyle}>
-                        <Link href="/product_home">
-                            PRODUCTS
-                        </Link>
+                        <a href="#products">PRODUCTS</a>
                     </li>
                     <li style={itemStyle}>
-                        <Link href="/">
-                            MEMBER
-                        </Link>
+                        <a href="#members">MEMBERS</a>
                     </li>
                 </ul>
             </nav>
@@ -49,7 +44,7 @@ const headerStyle = {
 
 const titleStyle = {
     margin: '0',
-    fontSize: '1.5rem',
+    fontSize: '3.5rem',
 };
 
 const listStyle = {
