@@ -1,0 +1,58 @@
+.container {
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+}
+
+.heroimage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10% 0 10% 0;
+}
+
+.about {
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    width: 100%;
+}
+
+.about p {
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    width: 70%;
+    background-color: gray;
+    font-size: 70px;
+}
+
+.members {
+    width: 70%;
+}
+
+.members>p {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 50px;
+}
+
+.membersBox {
+    display: flex;
+    flex-flow: row;
+    width: 100%;
+    margin-bottom: 400px;
+}
+
+.membersBox> :nth-child(2) {
+    margin: 0px 5% 0px 5%;
+}
+
+.member {
+    width: 30%;
+}
+
+.member>p {
+    font-size: 30px;
+    text-align: center;
+}
