@@ -10,19 +10,19 @@ const Page: React.FC = () => {
     useEffect(() => {
         if (canvas) return
 
-        //get canvas
+        // get canvas
         canvas = document.getElementById('canvas')!;
 
         // scene
         const scene = new THREE.Scene();
 
-        //size
+        // size
         const sizes = {
             width: innerWidth,
             height: innerHeight
         };
 
-        //renderer
+        // renderer
         const renderer = new THREE.WebGLRenderer({
             canvas: canvas || undefined,
             antialias: true,
@@ -43,33 +43,26 @@ const Page: React.FC = () => {
         plane.position.y = 0;
         plane.position.z = 0;
 
-        //camera
+        scene.add(plane);
+
+        // camera
         const camera = new THREE.PerspectiveCamera(
             75,
             sizes.width / sizes.height,
             0.1,
             1000
         );
-        //initial camera position
         camera.position.z = 5;
 
-        //OrbitControlsの導入
-        const controls = new OrbitControls(camera, renderer.domElement)
+        // OrbitControlsの導入
+        const controls = new OrbitControls(camera, renderer.domElement);
 
-
-        //load 3d model
+        // load 3d model
         const loader = new GLTFLoader();
         loader.load(
             '/3dModel/rikei.glb',
             function (gltf) {
                 scene.add(gltf.scene);
-
-                //いつ使うの？
-                //gltf.animations;
-                //gltf.scene;
-                //gltf.scenes;
-                //gltf.cameras;
-                //gltf.asset;
             },
             function (xhr) {
                 console.log((xhr.loaded / xhr.total * 100) + '% loaded');
@@ -77,32 +70,67 @@ const Page: React.FC = () => {
             function (error) {
                 console.log('エラーがおきたぞい');
             }
+        );
 
-        )
-
-        //light
+        // light
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
         scene.add(ambientLight);
         const pointLight = new THREE.PointLight(0xffffff, 0.2);
         pointLight.position.set(1, 2, 3);
         scene.add(pointLight);
 
-        //animation
+        // animation
         const clock = new THREE.Clock();
         const tick = () => {
             const elapsedTime = clock.getElapsedTime();
             window.requestAnimationFrame(tick);
             renderer.render(scene, camera);
         }
-        tick()
+        tick();
+
+        // resize event
         window.addEventListener('resize', () => {
-            sizes.width = window.innerWidth
-            sizes.height = window.innerHeight
-            camera.aspect = sizes.width / sizes.height
-            camera.updateProjectionMatrix()
-            renderer.setSize(sizes.width, sizes.height)
-            renderer.setPixelRatio(window.devicePixelRatio)
+            sizes.width = window.innerWidth;
+            sizes.height = window.innerHeight;
+            camera.aspect = sizes.width / sizes.height;
+            camera.updateProjectionMatrix();
+            renderer.setSize(sizes.width, sizes.height);
+            renderer.setPixelRatio(window.devicePixelRatio);
         });
+
+        // コード2をここに挿入
+        function onModelClick(event: MouseEvent) {
+            event.preventDefault();
+
+            // マウス座標の計算
+            const mouse = new THREE.Vector2(
+                (event.clientX / window.innerWidth) * 2 - 1,
+                -(event.clientY / window.innerHeight) * 2 + 1
+            );
+
+            // レイキャスティング
+            const raycaster = new THREE.Raycaster();
+            raycaster.setFromCamera(mouse, camera);
+
+            const intersects = raycaster.intersectObjects(scene.children, true);
+
+            if (intersects.length > 0) {
+                const intersect = intersects[0];
+
+                // ピンの作成
+                const pinGeometry = new THREE.SphereGeometry(0.1, 32, 32);
+                const pinMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+                const pin = new THREE.Mesh(pinGeometry, pinMaterial);
+
+                pin.position.copy(intersect.point);
+
+                scene.add(pin);
+
+                // 座標の取得と表示（またはデータベースへの格納）
+                console.log(pin.position);
+            }
+        }
+        renderer.domElement.addEventListener('click', onModelClick, false);
 
     }, [])
     return (
@@ -112,4 +140,4 @@ const Page: React.FC = () => {
     )
 }
 
-export default Page
+export default Page;
