@@ -18,8 +18,8 @@ const Page: React.FC = () => {
 
         //size
         const sizes = {
-            width: innerWidth,
-            height: innerHeight
+            width: window.innerWidth * 0.6,
+            height: window.innerHeight * 0.6
         };
 
         //renderer
@@ -48,7 +48,7 @@ const Page: React.FC = () => {
         //load 3d model
         const loader = new GLTFLoader();
         loader.load(
-            '/3dModel/rikei.glb',
+            '/3dModel/board.glb',
             function (gltf) {
                 scene.add(gltf.scene);
 
@@ -84,8 +84,8 @@ const Page: React.FC = () => {
         }
         tick()
         window.addEventListener('resize', () => {
-            sizes.width = window.innerWidth
-            sizes.height = window.innerHeight
+            sizes.width = window.innerWidth * 0.6
+            sizes.height = window.innerHeight * 0.6
             camera.aspect = sizes.width / sizes.height
             camera.updateProjectionMatrix()
             renderer.setSize(sizes.width, sizes.height)
