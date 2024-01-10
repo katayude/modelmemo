@@ -1,30 +1,53 @@
-import React from 'react';
+"use client"
 import Link from 'next/link';
 import Image from 'next/image';
 import Genbalist from '@/app/components/Genbalist';
+import React, { useEffect, useState } from 'react';
+
+type Sitetable = {
+    building: string;
+    location: string;
+    coordinator: string;
+    manager: string;
+    id: number;
+};
 
 const Mainmenue: React.FC = () => {
+
+    const [Sitetable, setSitetable] = useState<Sitetable[]>([]);
+
+    useEffect(() => {
+        async function fetchData() {
+            const response = await fetch('/api/getsitetable');
+            const data = await response.json();
+            if (data && data.result && Array.isArray(data.result.rows)) {
+                setSitetable(data.result.rows);
+            }
+        }
+
+        fetchData();
+    }, []);
+
     return (
         <div>
+
+            {Sitetable.map((site) => (
+                <div key={site.id} style={GenbaListStyle}>
+                    <Genbalist
+                        building={site.building}
+                        location={site.location}
+                        personInCharge={site.manager}
+                    />
+                </div>
+            ))}
+
+
             <div style={GenbaListStyle}>
 
                 <Genbalist
                     building='理系図書館'
                     location='2F'
                     personInCharge='飯田' />
-            </div>
-            <div style={GenbaListStyle}>
-
-                <Genbalist
-                    building='理系図書館'
-                    location='1F'
-                    personInCharge='山口' />
-            </div>
-            <div style={GenbaListStyle}>
-                <Genbalist
-                    building='理系図書館'
-                    location='3F'
-                    personInCharge='鵜飼' />
             </div>
 
             <div style={aiconstyle}>

@@ -8,7 +8,9 @@ const Page: React.FC = () => {
             <div style={pageStyle}>
                 <Sidemenue />
                 <div style={mainMenuStyle}>
-                    <Mainmenue2 />
+                    <Mainmenue2
+                        roomid={1}
+                    />
                 </div>
             </div>
         </div>
