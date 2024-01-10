@@ -1,47 +1,40 @@
-// pages/example.tsx
-"use client";
+import React from 'react';
+import Sidemenue from '@/app/components/Sidemenue';
+import Mainmenue2 from '@/app/components/Mainmenue2';
 
-import React, { useEffect, useState } from 'react';
-import Genbalist from '@/app/components/Roomlist';
+interface PageProps {
+    params: {
+        slug: string;
+    };
+}
 
-type Roomtable = {
-    constructionphase: string;
-    location: string;
-    creationdate: Date;
-    coordinator: string;
-    model3did: string;
-    siteid: number;
-    id: number;
-};
 
-export default function ExamplePage({ params }: { params: { slug: string } }) {
-    const [RoomTable, setRoomTable] = useState<Roomtable[]>([]);
-
-    useEffect(() => {
-        async function fetchData() {
-            // 文字列テンプレートリテラルを使用して、動的にURLを生成
-            const response = await fetch(`/api/getroomtable/${params.slug}`);
-            const data = await response.json();
-            if (data && data.result && Array.isArray(data.result.rows)) {
-                setRoomTable(data.result.rows);
-            }
-        }
-
-        fetchData();
-    }, [params.slug]); // useEffectの依存配列にparams.slugを追加
-
+const Page: React.FC<PageProps> = ({ params }) => {
     return (
         <div>
-            <h1>Genbalist</h1>
-            {RoomTable.map((site, index) => (
-                <Genbalist
-                    key={index}
-                    Construction_Phase={site.constructionphase}
-                    Created_Date={site.coordinator}
-                    personInCharge={site.location}
-                    Model={"3Dモデル"}
-                />
-            ))}
+            <div style={pageStyle}>
+                <Sidemenue />
+                <div style={mainMenuStyle}>
+                    <Mainmenue2
+                        roomid={Number(params.slug)}
+                    />
+                </div>
+            </div>
         </div>
     );
-}
+};
+
+const pageStyle = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: '1rem 0',
+    background: '#333',
+    color: 'white',
+    textAlign: 'center' as 'center',
+
+};
+const mainMenuStyle = {
+    width: '80%'
+};
+
+export default Page;
