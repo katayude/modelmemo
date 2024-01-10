@@ -9,7 +9,6 @@ const App: React.FC = () => {
             <div className={styles.topmenue}>
                 <Topmenue />
             </div>
-
             <div className={styles.contents}>
                 <div className={styles.model}>
                     <span><Model /></span>
