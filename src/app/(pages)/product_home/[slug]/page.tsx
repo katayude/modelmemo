@@ -35,6 +35,7 @@ export default function ExamplePage({ params }: { params: { slug: string } }) {
             <h1>Genbalist</h1>
             {RoomTable.map((site, index) => (
                 <Genbalist
+                    key={index}
                     Construction_Phase={site.constructionphase}
                     Created_Date={site.coordinator}
                     personInCharge={site.location}

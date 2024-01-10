@@ -51,6 +51,7 @@ const Mainmenue2: React.FC<Mainmenue2props> = ({ roomid }) => {
             {RoomTable.map((site, index) => (
                 <div style={roomListStyle}>
                     <Roomlist
+                        key={index}
                         Construction_Phase={site.constructionphase}
                         Created_Date={site.coordinator}
                         personInCharge={site.location}
