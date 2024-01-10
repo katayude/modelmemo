@@ -32,13 +32,15 @@ const Mainmenue: React.FC = () => {
         <div>
 
             {Sitetable.map((site) => (
-                <div key={site.id} style={GenbaListStyle}>
-                    <Genbalist
-                        building={site.building}
-                        location={site.location}
-                        personInCharge={site.manager}
-                    />
-                </div>
+                <Link key={site.id} href={`/product_home/${site.id}`} passHref>
+                    <div style={GenbaListStyle}>
+                        <Genbalist
+                            building={site.building}
+                            location={site.location}
+                            personInCharge={site.manager}
+                        />
+                    </div>
+                </Link>
             ))}
 
 
