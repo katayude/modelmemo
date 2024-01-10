@@ -48,7 +48,7 @@ const Page: React.FC = () => {
         //load 3d model
         const loader = new GLTFLoader();
         loader.load(
-            '/3dModel/board.glb',
+            '/3dModel/rikei.glb',
             function (gltf) {
                 scene.add(gltf.scene);
 
