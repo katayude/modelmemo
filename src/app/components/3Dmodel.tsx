@@ -10,6 +10,13 @@ const Page: React.FC = () => {
     useEffect(() => {
         if (canvas) return
 
+        // 仮の座標の配列を定義
+        const coordinates = [
+            { x: 1, y: 2, z: 3 },
+            { x: -2, y: 1, z: 4 },
+            { x: 5, y: 3, z: 10 }
+        ];
+
         //get canvas
         canvas = document.getElementById('canvas')!;
 
@@ -90,6 +97,14 @@ const Page: React.FC = () => {
             camera.updateProjectionMatrix()
             renderer.setSize(sizes.width, sizes.height)
             renderer.setPixelRatio(window.devicePixelRatio)
+        });
+
+        coordinates.forEach(coord => {
+            const pinGeometry = new THREE.SphereGeometry(0.1, 32, 32);
+            const pinMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+            const pin = new THREE.Mesh(pinGeometry, pinMaterial);
+            pin.position.set(coord.x, coord.y, coord.z);
+            scene.add(pin);
         });
 
     }, [])
