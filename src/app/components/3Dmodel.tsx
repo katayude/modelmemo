@@ -1,21 +1,45 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/Addons.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 const Page: React.FC = () => {
-    let canvas: HTMLElement
+    let canvas: HTMLElement | null;
+
+    const [coordinates, setCoordinates] = useState([
+        { x: 5, y: 3, z: 10 } // 初期座標データ
+    ]);
+
     useEffect(() => {
+        async function fetchCoordinates() {
+            try {
+                const response = await fetch('/api/getpintable/1');
+                const data = await response.json();
+
+                if (data && data.result && data.result.rows) {
+                    const newCoordinates = data.result.rows.map((row: { xcoordinate: number, ycoordinate: number, zcoordinate: number }) => ({
+                        x: row.xcoordinate,
+                        y: row.ycoordinate,
+                        z: row.zcoordinate
+                    }));
+
+                    setCoordinates(prev => [...prev, ...newCoordinates]);
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        fetchCoordinates();
+    }, []);
+
+    useEffect(() => {
+
         if (canvas) return
 
         // 仮の座標の配列を定義
-        const coordinates = [
-            { x: 1, y: 2, z: 3 },
-            { x: -2, y: 1, z: 4 },
-            { x: 5, y: 3, z: 10 }
-        ];
 
         //get canvas
         canvas = document.getElementById('canvas')!;
@@ -107,7 +131,7 @@ const Page: React.FC = () => {
             scene.add(pin);
         });
 
-    }, [])
+    }, [coordinates])
     return (
         <>
             <canvas id="canvas"></canvas>

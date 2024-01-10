@@ -49,14 +49,16 @@ const Mainmenue2: React.FC<Mainmenue2props> = ({ roomid }) => {
             </div>
 
             {RoomTable.map((site) => (
-                <div key={site.id} style={roomListStyle}> {/* ここで `site.id` を `key` として使用 */}
-                    <Roomlist
-                        Construction_Phase={site.constructionphase}
-                        Created_Date={site.coordinator}
-                        personInCharge={site.location}
-                        Model={"3Dモデル"}
-                    />
-                </div>
+                <Link key={site.id} href={`/product_3Dview`} passHref>
+                    <div key={site.id} style={roomListStyle}> {/* ここで `site.id` を `key` として使用 */}
+                        <Roomlist
+                            Construction_Phase={site.constructionphase}
+                            Created_Date={site.coordinator}
+                            personInCharge={site.location}
+                            Model={"3Dモデル"}
+                        />
+                    </div>
+                </Link>
             ))}
 
 
