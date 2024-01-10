@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import Model from '@/app/components/3Dmodel'; // 3Dグラフィックスを表示するコンポーネント
 import Topmenue from '@/app/components/Topmenue'; // TOPメニューを表示するコンポーネント
 import styles from './page.module.css'
@@ -16,7 +17,9 @@ const App: React.FC = () => {
                 {/* 画像を矢印に差し替える */}
                 <div className={styles.arrows}>
                     <img className={styles.img} src="/images/return.png" alt="*" />
-                    <img className={styles.img} src="/images/return.png" alt="*" />
+                    <Link className={styles.link} href={`/product_3Dedit`} passHref>
+                        <img className={styles.img} src="/images/edit.png" alt="*" />
+                    </Link>
                 </div>
                 {/* 画像一覧を表示する */}
                 <div className="images">
