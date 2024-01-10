@@ -31,16 +31,16 @@ const Mainmenue: React.FC = () => {
     return (
         <div>
 
-            {Sitetable.map((site, index) => (
-                <div style={GenbaListStyle}>
+            {Sitetable.map((site) => (
+                <div key={site.id} style={GenbaListStyle}>
                     <Genbalist
-                        //building={site.Building}
                         building={site.building}
                         location={site.location}
                         personInCharge={site.manager}
                     />
                 </div>
             ))}
+
 
             <div style={GenbaListStyle}>
 

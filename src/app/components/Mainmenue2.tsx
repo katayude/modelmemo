@@ -48,10 +48,9 @@ const Mainmenue2: React.FC<Mainmenue2props> = ({ roomid }) => {
                 />
             </div>
 
-            {RoomTable.map((site, index) => (
-                <div style={roomListStyle}>
+            {RoomTable.map((site) => (
+                <div key={site.id} style={roomListStyle}> {/* ここで `site.id` を `key` として使用 */}
                     <Roomlist
-                        key={index}
                         Construction_Phase={site.constructionphase}
                         Created_Date={site.coordinator}
                         personInCharge={site.location}
@@ -59,6 +58,7 @@ const Mainmenue2: React.FC<Mainmenue2props> = ({ roomid }) => {
                     />
                 </div>
             ))}
+
 
             <div style={aiconstyle}>
                 <Image src="/images/plus.png" alt="logo" width={100} height={100} />
