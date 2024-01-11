@@ -12,6 +12,7 @@ const Page: React.FC = () => {
         { x: 5, y: 3, z: 10 } // 初期座標データ
     ]);
 
+    //データベースから座標を取得
     useEffect(() => {
         async function fetchCoordinates() {
             try {
