@@ -9,7 +9,7 @@ const Page: React.FC = () => {
     let canvas: HTMLElement | null;
 
     const [coordinates, setCoordinates] = useState([
-        { x: 5, y: 3, z: 10 } // 初期座標データ
+        { x: 5, y: 3, z: 10 }// 初期座標データ
     ]);
 
     //データベースから座標を取得

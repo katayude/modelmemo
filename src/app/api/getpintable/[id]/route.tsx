@@ -6,6 +6,7 @@ export async function GET(request: Request, { params }: { params: { id: number }
         // URLからsiteidを取得する（例: ?siteid=3）
         const id = params.id;
 
+
         // siteidが指定されていない場合はエラーを返す
         if (!id) {
             return NextResponse.json({ error: 'No id provided' }, { status: 400 });
@@ -13,7 +14,8 @@ export async function GET(request: Request, { params }: { params: { id: number }
 
         // SQLクエリでsiteidを使用する
         const result =
-            await sql`SELECT * FROM pintable WHERE model3did = 1;`;
+            await sql`SELECT * FROM Pintable WHERE Model3did = 1;`;
+
         return NextResponse.json({ result }, { status: 200 });
     } catch (error) {
         return NextResponse.json({ error }, { status: 500 });
