@@ -2,6 +2,7 @@ import { sql } from '@vercel/postgres';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { NextResponse } from 'next/server';
 import { NextRequest } from "next/server";
+import { v4 as uuidv4 } from 'uuid'; // UUIDライブラリのインポート
 
 export async function POST(request: NextRequest, response: NextResponse) {
     try {
@@ -12,7 +13,11 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
         if (!x || !y || !z || !model3did) throw new Error('Pet and owner names required');
 
-        await sql`INSERT INTO Pintable (Xcoordinate, Ycoordinate, Zcoordinate, Model3did) VALUES (${x}, ${y}, ${z}, ${model3did});`;
+        const id = uuidv4();
+
+        console.log(`id: ${id}`);
+
+        await sql`INSERT INTO Pintable (Id, Xcoordinate, Ycoordinate, Zcoordinate, Model3did) VALUES (${id}, ${x}, ${y}, ${z}, ${model3did});`;
         console.log(`Added ${x}, ${y}, ${z}, ${model3did} to the database`);
 
         //const pets = await sql`SELECT * FROM Pets;`;
@@ -21,6 +26,6 @@ export async function POST(request: NextRequest, response: NextResponse) {
         return NextResponse.json({ error }, { status: 500 });
     }
 
-    const pets = await sql`SELECT * FROM Pets;`;
-    return NextResponse.json({ pets }, { status: 200 });
+    const pin = await sql`SELECT * FROM Pintable;`;
+    return NextResponse.json({ pin }, { status: 200 });
 }

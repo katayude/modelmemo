@@ -1,12 +1,42 @@
 'use client';
 
-import { useEffect } from 'react';
+import { use, useEffect } from 'react';
+import { useState } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/Addons.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 const Page: React.FC = () => {
     let canvas: HTMLCanvasElement
+
+    //ピンをデータベースに登録するapiを呼び出す関数
+    const [x, setx] = useState(0);
+    const [y, sety] = useState(0);
+    const [z, setz] = useState(0);
+    const [model3did, setmodel3did] = useState(0);
+
+    const handleSubmit = async (x: Number, y: Number, z: Number, model3did: Number) => {
+
+        try {
+            const response = await fetch('/api/postpintable', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ x, y, z, model3did })
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            // Handle the response data
+            const data = await response.json();
+            console.log(data);
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
+        }
+    };
+
+
     useEffect(() => {
         if (canvas) return
 
@@ -130,10 +160,26 @@ const Page: React.FC = () => {
 
                 pin.position.copy(intersect.point);
 
+
                 scene.add(pin);
 
                 // 座標の取得と表示（またはデータベースへの格納）
                 console.log(pin.position);
+
+
+                const x = pin.position.x;
+                const y = pin.position.y;
+                const z = pin.position.z;
+                const model3did = 1;
+
+
+                console.log("x:" + x);
+
+                handleSubmit(x, y, z, model3did);
+                //pin.positionが座標
+
+
+
             }
 
         }
