@@ -1,7 +1,7 @@
 import { sql } from '@vercel/postgres';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { NextResponse } from 'next/server';
-import { NextRequest } from "next/server"
+import { NextRequest } from "next/server";
 
 export async function POST(request: NextRequest, response: NextResponse) {
     try {
