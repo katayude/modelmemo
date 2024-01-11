@@ -102,8 +102,8 @@ const Page: React.FC = () => {
             canvas.addEventListener('click', onModelClick, false);
         }
 
-        function handlePinAdded(pin) {
-            // ここに後で処理を追加
+        function handlePinAdded(pin: any) {
+            //後で追加
         }
 
         function onModelClick(event: MouseEvent) {
