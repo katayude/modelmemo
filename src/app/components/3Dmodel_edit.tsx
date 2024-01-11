@@ -102,6 +102,10 @@ const Page: React.FC = () => {
             canvas.addEventListener('click', onModelClick, false);
         }
 
+        function handlePinAdded(pin: any) {
+            //後で追加
+        }
+
         function onModelClick(event: MouseEvent) {
             event.preventDefault();
 
@@ -131,6 +135,9 @@ const Page: React.FC = () => {
                 pin.position.copy(intersect.point);
 
                 scene.add(pin);
+
+                // ピンが追加された後の処理を行う関数の呼び出し
+                handlePinAdded(pin);
 
                 // 座標の取得と表示（またはデータベースへの格納）
                 console.log(pin.position);
