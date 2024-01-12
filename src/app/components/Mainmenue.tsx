@@ -10,6 +10,7 @@ type Sitetable = {
     coordinator: string;
     manager: string;
     id: number;
+    imagepath: string;
 };
 
 const Mainmenue: React.FC = () => {
@@ -18,7 +19,14 @@ const Mainmenue: React.FC = () => {
 
     useEffect(() => {
         async function fetchData() {
-            const response = await fetch('/api/getsitetable');
+            const response = await fetch('/api/getsitetable', {
+                method: 'GET',
+                headers: {
+                    'Cache-Control': 'no-cache',
+                    'Pragma': 'no-cache',
+                    'Expires': '0'
+                }
+            });
             const data = await response.json();
             if (data && data.result && Array.isArray(data.result.rows)) {
                 setSitetable(data.result.rows);
@@ -38,19 +46,12 @@ const Mainmenue: React.FC = () => {
                             building={site.building}
                             location={site.location}
                             personInCharge={site.manager}
+                            imagepath={site.imagepath}
                         />
                     </div>
+
                 </Link>
             ))}
-
-
-            <div style={GenbaListStyle}>
-
-                <Genbalist
-                    building='理系図書館'
-                    location='2F'
-                    personInCharge='飯田' />
-            </div>
 
             <div style={aiconstyle}>
                 <Image src="/images/plus.png" alt="logo" width={100} height={100} />
