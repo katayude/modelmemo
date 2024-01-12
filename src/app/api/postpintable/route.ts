@@ -17,7 +17,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
         console.log(`id: ${id}`);
 
-        await sql`INSERT INTO Pintable (Id, Xcoordinate, Ycoordinate, Zcoordinate, Model3did) VALUES (${id}, ${x}, ${y}, ${z}, ${model3did});`;
+        await sql`INSERT INTO Pin (Id, Xcoordinate, Ycoordinate, Zcoordinate, Model3did) VALUES (${id}, ${x}, ${y}, ${z}, ${model3did});`;
         console.log(`Added ${x}, ${y}, ${z}, ${model3did} to the database`);
 
         //const pets = await sql`SELECT * FROM Pets;`;
@@ -26,6 +26,6 @@ export async function POST(request: NextRequest, response: NextResponse) {
         return NextResponse.json({ error }, { status: 500 });
     }
 
-    const pin = await sql`SELECT * FROM Pintable;`;
+    const pin = await sql`SELECT * FROM Pin;`;
     return NextResponse.json({ pin }, { status: 200 });
 }

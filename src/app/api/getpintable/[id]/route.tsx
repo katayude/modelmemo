@@ -14,7 +14,11 @@ export async function GET(request: Request, { params }: { params: { id: number }
 
         // SQLクエリでsiteidを使用する
         const result =
-            await sql`SELECT * FROM Pintable WHERE Model3did = 1;`;
+            await sql`SELECT * FROM Pin WHERE Model3did = ${id};`;
+        //テーブルの中身は変わらなかった。しかし、sql文を書き換えるとその変更したsqlに対してのみ結果が変更される。その変更はsql自体に保存されていてよくわからないエラーである。 
+
+        console.log(result);
+
 
         return NextResponse.json({ result }, { status: 200 });
     } catch (error) {

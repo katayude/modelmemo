@@ -9,14 +9,21 @@ const Page: React.FC = () => {
     let canvas: HTMLElement | null;
 
     const [coordinates, setCoordinates] = useState([
-        { x: 5, y: 3, z: 10 }// 初期座標データ
+        { x: 5, y: 3, z: 10 } // 初期座標データ
     ]);
 
     //データベースから座標を取得
     useEffect(() => {
         async function fetchCoordinates() {
             try {
-                const response = await fetch('/api/getpintable/1');
+                const response = await fetch('/api/getpintable/1', {
+                    method: 'GET',
+                    headers: {
+                        'Cache-Control': 'no-cache',
+                        'Pragma': 'no-cache',
+                        'Expires': '0'
+                    }
+                });
                 const data = await response.json();
 
                 if (data && data.result && data.result.rows) {
@@ -130,6 +137,7 @@ const Page: React.FC = () => {
             const pin = new THREE.Mesh(pinGeometry, pinMaterial);
             pin.position.set(coord.x, coord.y, coord.z);
             scene.add(pin);
+            //console.log(coord.x, coord.y, coord.z);
         });
 
     }, [coordinates])
