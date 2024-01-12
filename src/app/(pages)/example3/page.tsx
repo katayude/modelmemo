@@ -10,6 +10,7 @@ type ConstructionSite = {
     location: string;
     manager: string;
     created_at: Date;
+    imagepath: string;
 };
 
 export default function ExamplePage() {
@@ -36,6 +37,7 @@ export default function ExamplePage() {
                     building={site.building}
                     location={site.location}
                     personInCharge={site.manager}
+                    imagepath={site.imagepath}
                 />
             ))}
         </div>

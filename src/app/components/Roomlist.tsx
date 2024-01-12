@@ -1,20 +1,18 @@
-import React, { ReactNode } from 'react'
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-type Roomlistprops = {
-    /*施工段階
-    作成日
-    担当者
-    3Dモデル*/
-    Construction_Phase: string
-    Created_Date: string
-    personInCharge: string
-    Model: string
-
+type RoomlistProps = {
+    Construction_Phase: string;
+    Created_Date: string;
+    personInCharge: string;
+    Model: string;
+    roomid: number;
 };
 
-const Roomlist: React.FC<Roomlistprops> = ({ Construction_Phase, Created_Date, personInCharge, Model }) => {
+const Roomlist: React.FC<RoomlistProps> = ({ Construction_Phase, Created_Date, personInCharge, Model, roomid }) => {
+
+
     return (
         <div className="wrapper" style={wrapperStyle}>
             <div className="info" style={infoStyle}>
@@ -25,7 +23,7 @@ const Roomlist: React.FC<Roomlistprops> = ({ Construction_Phase, Created_Date, p
             </div>
             <div className="photo" style={photoStyle}>
                 <div className="photoImg">
-                    <Image src="/images/yutaka.png" alt="logo" width={100} height={100} />
+                    <Image src={`/images/yutaka.png`} alt="Room Image" width={100} height={100} />
                 </div>
             </div>
         </div>

@@ -183,8 +183,8 @@ const Page: React.FC = () => {
                 console.log("x:" + x);
 
                 handleSubmit(x, y, z, model3did);
-                //pin.positionが座標
 
+                //pin.positionが座標
 
 
             }

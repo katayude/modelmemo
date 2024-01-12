@@ -26,7 +26,14 @@ const Mainmenue2: React.FC<Mainmenue2props> = ({ roomid }) => {
     useEffect(() => {
         async function fetchData() {
             // 文字列テンプレートリテラルを使用して、動的にURLを生成
-            const response = await fetch(`/api/getroomtable/${roomid}`);
+            const response = await fetch(`/api/getroomtable/${roomid}`, {
+                method: 'GET',
+                headers: {
+                    'Cache-Control': 'no-cache',
+                    'Pragma': 'no-cache',
+                    'Expires': '0'
+                }
+            });
             const data = await response.json();
             if (data && data.result && Array.isArray(data.result.rows)) {
                 setRoomTable(data.result.rows);
@@ -45,6 +52,7 @@ const Mainmenue2: React.FC<Mainmenue2props> = ({ roomid }) => {
                     Created_Date='12/5'
                     personInCharge='山口'
                     Model='あとで'
+                    roomid={1}
                 />
             </div>
 
@@ -56,6 +64,7 @@ const Mainmenue2: React.FC<Mainmenue2props> = ({ roomid }) => {
                             Created_Date={site.coordinator}
                             personInCharge={site.location}
                             Model={"3Dモデル"}
+                            roomid={site.id}
                         />
                     </div>
                 </Link>
