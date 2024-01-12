@@ -1,16 +1,21 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/Addons.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import DisplayImage from '@/app/components/displayImage';
 
 const Page: React.FC = () => {
-    let canvas: HTMLElement | null;
+    //let canvas: HTMLCanvasElement | null;
+    let canvas: HTMLCanvasElement;
+    const canvasRef = useRef(null);
 
     const [coordinates, setCoordinates] = useState([
-        { x: 5, y: 3, z: 10 } // 初期座標データ
+        { x: 5, y: 3, z: 10, id: 'a' } // 初期座標データ
     ]);
+
+    const [pin_id, setPin_id] = useState('a');
 
     //データベースから座標を取得
     useEffect(() => {
@@ -27,10 +32,11 @@ const Page: React.FC = () => {
                 const data = await response.json();
 
                 if (data && data.result && data.result.rows) {
-                    const newCoordinates = data.result.rows.map((row: { xcoordinate: number, ycoordinate: number, zcoordinate: number }) => ({
+                    const newCoordinates = data.result.rows.map((row: { xcoordinate: number, ycoordinate: number, zcoordinate: number, id: string }) => ({
                         x: row.xcoordinate,
                         y: row.ycoordinate,
-                        z: row.zcoordinate
+                        z: row.zcoordinate,
+                        id: row.id
                     }));
 
                     setCoordinates(prev => [...prev, ...newCoordinates]);
@@ -50,7 +56,7 @@ const Page: React.FC = () => {
         // 仮の座標の配列を定義
 
         //get canvas
-        canvas = document.getElementById('canvas')!;
+        canvas = document.getElementById('canvas') as HTMLCanvasElement;
 
         // scene
         const scene = new THREE.Scene();
@@ -117,7 +123,6 @@ const Page: React.FC = () => {
         //animation
         const clock = new THREE.Clock();
         const tick = () => {
-            const elapsedTime = clock.getElapsedTime();
             window.requestAnimationFrame(tick);
             renderer.render(scene, camera);
         }
@@ -131,19 +136,60 @@ const Page: React.FC = () => {
             renderer.setPixelRatio(window.devicePixelRatio)
         });
 
+
+        //pin def
+        let pin: any
+        const pins: any = [];
+
         coordinates.forEach(coord => {
             const pinGeometry = new THREE.SphereGeometry(0.1, 32, 32);
             const pinMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
             const pin = new THREE.Mesh(pinGeometry, pinMaterial);
             pin.position.set(coord.x, coord.y, coord.z);
+            pin.userData.customId = coord.id
             scene.add(pin);
-            //console.log(coord.x, coord.y, coord.z);
+            pins.push(pin);
+            //console.log(coord.x, coord.y, coord.z, coord.id);
         });
 
+
+        function addModelClickListener() {
+            canvas.addEventListener('click', onModelClick, false);
+        }
+
+        function onModelClick(event: MouseEvent) {
+            event.preventDefault();
+
+            // mouse変数を関数スコープに移動
+            const mouse = new THREE.Vector2();
+            const rect = canvas.getBoundingClientRect();
+            mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+            mouse.y = - ((event.clientY - rect.top) / rect.height) * 2 + 1;
+            // レイキャスティング
+            const raycaster = new THREE.Raycaster();
+            raycaster.setFromCamera(mouse, camera);
+
+            const intersects = raycaster.intersectObjects(scene.children, true);
+
+            if (intersects.length > 0) {
+                //オブジェクトを検出
+                const object = intersects[0].object;
+                const intersect = intersects[0];
+                if (pins.includes(object)) {
+                    const pin_id: string = object.userData.customId;
+                    //console.log(object.userData.customId);
+                    setPin_id(object.userData.customId);
+
+                }
+            }
+        }
+        addModelClickListener();
+        renderer.domElement.addEventListener('click', onModelClick, false);
     }, [coordinates])
     return (
         <>
-            <canvas id="canvas"></canvas>
+            <canvas id="canvas" ref={canvasRef}></canvas>
+            <DisplayImage pinId={pin_id} />
         </>
     )
 }
