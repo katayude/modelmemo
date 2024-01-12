@@ -13,13 +13,8 @@
 .model {
     display: flex;
     padding: 0;
-    max-width: 80%;
+    max-width: 100%;
     box-sizing: border-box;
-}
-
-.model span {
-    padding: 0;
-    border: 2px solid black;
 }
 
 .arrows {

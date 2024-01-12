@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/Addons.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import DisplayImage from '@/app/components/displayImage';
+import styles from './3Dmodel.module.css';
 
 const Page: React.FC = () => {
     //let canvas: HTMLCanvasElement | null;
@@ -179,7 +180,6 @@ const Page: React.FC = () => {
                     const pin_id: string = object.userData.customId;
                     //console.log(object.userData.customId);
                     setPin_id(object.userData.customId);
-
                 }
             }
         }
@@ -187,10 +187,14 @@ const Page: React.FC = () => {
         renderer.domElement.addEventListener('click', onModelClick, false);
     }, [coordinates])
     return (
-        <>
-            <canvas id="canvas" ref={canvasRef}></canvas>
-            <DisplayImage pinId={pin_id} />
-        </>
+        <div className={styles.container}>
+            <div className={styles.model}>
+                <canvas id="canvas" ref={canvasRef}></canvas>
+            </div>
+            <div className={styles.images}>
+                <DisplayImage pinId={pin_id} />
+            </div>
+        </div>
     )
 }
 
