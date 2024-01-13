@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
                         <a href="#about">ABOUT</a>
                     </li>
                     <li style={itemStyle}>
-                        <a href="#products">PRODUCTS</a>
+                        <a href="/product_home">PRODUCTS</a>
                     </li>
                     <li style={itemStyle}>
                         <a href="#members">MEMBERS</a>
