@@ -22,7 +22,9 @@ const App: React.FC<ThreeDviewProps> = ({ params }) => {
                 </div>
                 {/* 画像を矢印に差し替える */}
                 <div className={styles.arrows}>
-                    <img className={styles.img} src="/images/return.png" alt="*" />
+                    <Link className={styles.link} href={`/product_room/1`} passHref>
+                        <img className={styles.img} src="/images/return.png" alt="*" />
+                    </Link>
                     <Link className={styles.link} href={`/product_3Dedit/${Number(params.id)}`} passHref>
                         <img className={styles.img} src="/images/edit.png" alt="*" />
                     </Link>

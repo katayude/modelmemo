@@ -24,7 +24,9 @@ const App: React.FC<ThreeDeditProps> = ({ params }) => {
                 </div>
                 {/* 画像を矢印に差し替える */}
                 <div className={styles.arrows}>
-                    <img className={styles.img} src="/images/return.png" alt="*" />
+                    <Link className={styles.link} href={`/product_room/1`} passHref>
+                        <img className={styles.img} src="/images/return.png" alt="*" />
+                    </Link>
                     <Link className={styles.link} href={`/product_3Dview/${Number(params.id)}`} passHref>
                         <img className={styles.img} src="/images/checkmark.png" alt="*" />
                     </Link>
