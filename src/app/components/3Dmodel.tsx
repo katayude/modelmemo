@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/Addons.js';
+import { GLTFLoader, ThreeMFLoader } from 'three/examples/jsm/Addons.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import DisplayImage from '@/app/components/displayImage';
 import styles from './3Dmodel.module.css';
@@ -11,7 +11,7 @@ const Page: React.FC = () => {
     //let canvas: HTMLCanvasElement | null;
     let canvas: HTMLCanvasElement;
     const canvasRef = useRef(null);
-
+    let selectedObject: any = null;
     const [coordinates, setCoordinates] = useState([
         { x: 5, y: 3, z: 10, id: 'a', path: 'b' } // 初期座標データ
     ]);
@@ -150,8 +150,8 @@ const Page: React.FC = () => {
             const pinMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
             const pin = new THREE.Mesh(pinGeometry, pinMaterial);
             pin.position.set(coord.x, coord.y, coord.z);
-            pin.userData.customId = coord.id
-            pin.userData.customPath = coord.path
+            pin.userData.customId = coord.id;
+            pin.userData.customPath = coord.path;
             scene.add(pin);
             pins.push(pin);
             //console.log(coord.x, coord.y, coord.z, coord.id);
@@ -176,11 +176,24 @@ const Page: React.FC = () => {
 
             const intersects = raycaster.intersectObjects(scene.children, true);
 
-            if (intersects.length > 0) {
-                const intersectedObject = intersects[0].object;
 
+            if (intersects.length > 0) {
+                const intersectedObject = intersects[0].object as THREE.Mesh;
+
+                if (selectedObject) {
+                    if (selectedObject !== intersectedObject) {
+                        const material01 = selectedObject.material as THREE.MeshBasicMaterial;
+                        material01.color.set('red');//色を元に戻す
+                    }
+                }
 
                 if (pins.includes(intersectedObject)) {
+                    selectedObject = intersectedObject;
+
+                    const material02 = intersectedObject.material as THREE.MeshBasicMaterial;
+                    material02.color.set('black');//色を変更する
+                    material02.needsUpdate = true;
+                    scene.add(intersectedObject);
                     setPin_id(intersectedObject.userData.customId);
                     setPin_path(intersectedObject.userData.customPath);
                 }
@@ -192,6 +205,7 @@ const Page: React.FC = () => {
         addModelClickListener();
         renderer.domElement.addEventListener('click', onModelClick, false);
     }, [coordinates])
+
     return (
         <div className={styles.container}>
             <div className={styles.model}>

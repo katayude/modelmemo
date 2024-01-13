@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Model from '@/app/components/3Dmodel'; // 3Dグラフィックスを表示するコンポーネント
 import Topmenue from '@/app/components/Topmenue'; // TOPメニューを表示するコンポーネント
-import styles from './page.module.css'
+import styles from './page.module.css';
 
 const App: React.FC = () => {
     return (
