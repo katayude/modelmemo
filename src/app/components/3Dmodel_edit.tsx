@@ -18,6 +18,7 @@ const Page: React.FC<ThreeDmodelProps> = ({ roomid }) => {
     const [y, sety] = useState(0);
     const [z, setz] = useState(0);
     const [model3did, setmodel3did] = useState(0);
+    const [threedpath, setThreedpath] = useState('');
 
     const handleSubmit = async (x: Number, y: Number, z: Number, model3did: Number) => {
 
@@ -39,6 +40,29 @@ const Page: React.FC<ThreeDmodelProps> = ({ roomid }) => {
             console.error('There was a problem with the fetch operation:', error);
         }
     };
+
+    useEffect(() => {
+        async function fetch3dpath() {
+            try {
+                const response = await fetch(`/api/get3dtable/${roomid}`, {
+                    method: 'GET',
+                    headers: {
+                        'Cache-Control': 'no-cache',
+                        'Pragma': 'no-cache',
+                        'Expires': '0'
+                    }
+                });
+                const data = await response.json();
+                console.log(data.result.rows[0].model3dpath);
+                // threedpathをセット
+                setThreedpath(data.result.rows[0].model3dpath);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        fetch3dpath();
+    }, [roomid]);
 
 
     useEffect(() => {
@@ -96,7 +120,7 @@ const Page: React.FC<ThreeDmodelProps> = ({ roomid }) => {
         // load 3d model
         const loader = new GLTFLoader();
         loader.load(
-            '/3dModel/genba.glb',
+            `/3dModel/${threedpath}`,
             function (gltf) {
                 scene.add(gltf.scene);
             },
@@ -201,7 +225,7 @@ const Page: React.FC<ThreeDmodelProps> = ({ roomid }) => {
         addModelClickListener();
         renderer.domElement.addEventListener('click', onModelClick, false);
 
-    }, [])
+    }, [threedpath])
     return (
         <>
             <canvas id="canvas"></canvas>
