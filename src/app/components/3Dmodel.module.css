@@ -6,3 +6,13 @@
 .container {
     display: flex;
 }
+
+.images {
+    position: fixed;
+    right: 0;
+    margin-right: 5%;
+    border: solid 3px #192A3C;
+    padding: 2%;
+    padding-top: 1%;
+    background-color: #BDD7EE;
+}

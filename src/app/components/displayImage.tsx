@@ -1,5 +1,4 @@
-import react, { useState } from 'react';
-import { div } from 'three/examples/jsm/nodes/Nodes.js';
+import styles from './displayImage.module.css';
 import Image from 'next/image';
 
 type displayImageProps = {
@@ -9,8 +8,8 @@ type displayImageProps = {
 
 const DisplayImage: React.FC<displayImageProps> = ({ pinId, imagePath }) => {
     return (
-        <div>
-            {pinId},
+        <div className={styles.container}>
+            <span>選択したピンの写真</span>
             <Image src={`/images/rikei/${imagePath}`} alt="Room Image" width={300} height={300} />
         </div>
 
