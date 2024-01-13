@@ -25,7 +25,9 @@ const Page: React.FC<ThreeDmodelProps> = ({ roomid }) => {
         try {
             const response = await fetch('/api/postpintable', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                },
                 body: JSON.stringify({ x, y, z, model3did })
             });
 
@@ -35,7 +37,7 @@ const Page: React.FC<ThreeDmodelProps> = ({ roomid }) => {
 
             // Handle the response data
             const data = await response.json();
-            console.log(data);
+            //console.log(data);
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
         }
@@ -201,7 +203,7 @@ const Page: React.FC<ThreeDmodelProps> = ({ roomid }) => {
                 handlePinAdded(pin);
 
                 // 座標の取得と表示（またはデータベースへの格納）
-                console.log(pin.position);
+                //console.log(pin.position);
 
 
                 const x = pin.position.x;
@@ -210,9 +212,8 @@ const Page: React.FC<ThreeDmodelProps> = ({ roomid }) => {
                 const model3did = roomid;
 
 
-                console.log("x:" + x);
-
                 handleSubmit(x, y, z, model3did);
+
 
                 //pin.positionが座標
 

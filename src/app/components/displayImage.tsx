@@ -10,7 +10,7 @@ const DisplayImage: React.FC<displayImageProps> = ({ pinId, imagePath }) => {
     return (
         <div className={styles.container}>
             <span>選択したピンの写真</span>
-            <Image src={`/images/rikei/${imagePath}`} alt="Room Image" width={300} height={300} />
+            <Image src={`/images/${imagePath}`} alt="Room Image" width={300} height={300} />
         </div>
 
 
