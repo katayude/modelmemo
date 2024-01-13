@@ -8,9 +8,10 @@ type RoomlistProps = {
     personInCharge: string;
     Model: string;
     roomid: number;
+    imagepath: string;
 };
 
-const Roomlist: React.FC<RoomlistProps> = ({ Construction_Phase, Created_Date, personInCharge, Model, roomid }) => {
+const Roomlist: React.FC<RoomlistProps> = ({ Construction_Phase, Created_Date, personInCharge, Model, roomid, imagepath }) => {
 
 
     return (
@@ -23,7 +24,7 @@ const Roomlist: React.FC<RoomlistProps> = ({ Construction_Phase, Created_Date, p
             </div>
             <div className="photo" style={photoStyle}>
                 <div className="photoImg">
-                    <Image src={`/images/genba/IMG_1664.jpg`} alt="Room Image" width={100} height={100} />
+                    <Image src={`/images/${imagepath}`} alt="Room Image" width={100} height={100} />
                 </div>
             </div>
         </div>
