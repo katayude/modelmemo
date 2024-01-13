@@ -4,12 +4,18 @@
     position: fixed;
     padding: 0;
     width: 100%;
-    height: 60px;
-    border-bottom: 1px solid black;
-    background-color: white;
+    height: 70px;
+    border-bottom: 3px solid black;
+    background-color: #192A3C;
 }
 
 .nav span {
     padding: 0;
+    font-size: large;
+    font-family: Yu 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #BDD7EE;
+}
 
+.nav img {
+    margin-left: 5%;
 }
