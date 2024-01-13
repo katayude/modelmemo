@@ -6,7 +6,7 @@ import styles from './page.module.css';
 
 const App: React.FC = () => {
     return (
-        <>
+        <div className={styles.all}>
             <div className={styles.topmenue}>
                 <Topmenue />
             </div>
@@ -26,7 +26,7 @@ const App: React.FC = () => {
                 </div>
 
             </div>
-        </>
+        </div>
     );
 };
 
