@@ -59,7 +59,7 @@ const Mainmenue2: React.FC<Mainmenue2props> = ({ genbaid }) => {
             </div>
 
             {RoomTable.map((site) => (
-                <Link key={site.id} href={`/product_3Dview`} passHref>
+                <Link key={site.id} href={`/product_3Dview/${site.id}`} passHref>
                     <div key={site.id} style={roomListStyle}> {/* ここで `site.id` を `key` として使用 */}
                         <Roomlist
                             Construction_Phase={site.constructionphase}

@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { use } from 'react';
 import Link from 'next/link';
 import Model from '@/app/components/3Dmodel'; // 3Dグラフィックスを表示するコンポーネント
 import Topmenue from '@/app/components/Topmenue'; // TOPメニューを表示するコンポーネント
 import styles from './page.module.css';
 
-const App: React.FC = () => {
+type ThreeDviewProps = {
+    params: {
+        id: number;
+    };
+};
+
+const App: React.FC<ThreeDviewProps> = ({ params }) => {
     return (
         <div className={styles.all}>
             <div className={styles.topmenue}>
@@ -12,7 +18,7 @@ const App: React.FC = () => {
             </div>
             <div className={styles.contents}>
                 <div className={styles.model}>
-                    <span><Model /></span>
+                    <span><Model roomid={Number(params.id)} /></span>
                 </div>
                 {/* 画像を矢印に差し替える */}
                 <div className={styles.arrows}>

@@ -6,8 +6,13 @@ import { GLTFLoader, ThreeMFLoader } from 'three/examples/jsm/Addons.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import DisplayImage from '@/app/components/displayImage';
 import styles from './3Dmodel.module.css';
+import { cos } from 'three/examples/jsm/nodes/Nodes.js';
 
-const Page: React.FC = () => {
+type ThreeDmodelProps = {
+    roomid: number;
+};
+
+const Page: React.FC<ThreeDmodelProps> = ({ roomid }) => {
     //let canvas: HTMLCanvasElement | null;
     let canvas: HTMLCanvasElement;
     const canvasRef = useRef(null);
@@ -15,15 +20,39 @@ const Page: React.FC = () => {
     const [coordinates, setCoordinates] = useState([
         { x: 5, y: 3, z: 10, id: 'a', path: 'b' } // 初期座標データ
     ]);
+    const [threedpath, setThreedpath] = useState('');
 
     const [pin_id, setPin_id] = useState('a');
     const [pin_path, setPin_path] = useState('b');
+
+    useEffect(() => {
+        async function fetch3dpath() {
+            try {
+                const response = await fetch(`/api/get3dtable/${roomid}`, {
+                    method: 'GET',
+                    headers: {
+                        'Cache-Control': 'no-cache',
+                        'Pragma': 'no-cache',
+                        'Expires': '0'
+                    }
+                });
+                const data = await response.json();
+                console.log(data.result.rows[0].model3dpath);
+                // threedpathをセット
+                setThreedpath(data.result.rows[0].model3dpath);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        fetch3dpath();
+    }, [roomid]);
 
     //データベースから座標を取得
     useEffect(() => {
         async function fetchCoordinates() {
             try {
-                const response = await fetch('/api/getpintable/1', {
+                const response = await fetch(`/api/getpintable/${roomid}`, {
                     method: 'GET',
                     headers: {
                         'Cache-Control': 'no-cache',
@@ -51,7 +80,7 @@ const Page: React.FC = () => {
         }
 
         fetchCoordinates();
-    }, []);
+    }, [roomid]);
 
     useEffect(() => {
 
@@ -98,8 +127,9 @@ const Page: React.FC = () => {
 
         //load 3d model
         const loader = new GLTFLoader();
+        console.log(`3dpath:${threedpath}`);
         loader.load(
-            '/3dModel/genba.glb',
+            `/3dModel/${threedpath}`,
             function (gltf) {
                 scene.add(gltf.scene);
 
@@ -115,6 +145,7 @@ const Page: React.FC = () => {
             },
             function (error) {
                 console.log('エラーがおきたぞい');
+                //console.log(`3dpath:${threedpath}`);
             }
 
         )
@@ -205,7 +236,7 @@ const Page: React.FC = () => {
 
         }
         addModelClickListener();
-    }, [coordinates])
+    }, [threedpath])
 
     return (
         <div className={styles.container}>
