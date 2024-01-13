@@ -73,6 +73,7 @@ const Page: React.FC<ThreeDmodelProps> = ({ roomid }) => {
                     }));
 
                     setCoordinates(prev => [...prev, ...newCoordinates]);
+
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
