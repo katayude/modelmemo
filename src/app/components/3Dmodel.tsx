@@ -13,10 +13,11 @@ const Page: React.FC = () => {
     const canvasRef = useRef(null);
 
     const [coordinates, setCoordinates] = useState([
-        { x: 5, y: 3, z: 10, id: 'a' } // 初期座標データ
+        { x: 5, y: 3, z: 10, id: 'a', path: 'b' } // 初期座標データ
     ]);
 
     const [pin_id, setPin_id] = useState('a');
+    const [pin_path, setPin_path] = useState('b');
 
     //データベースから座標を取得
     useEffect(() => {
@@ -33,11 +34,13 @@ const Page: React.FC = () => {
                 const data = await response.json();
 
                 if (data && data.result && data.result.rows) {
-                    const newCoordinates = data.result.rows.map((row: { xcoordinate: number, ycoordinate: number, zcoordinate: number, id: string }) => ({
+                    const newCoordinates = data.result.rows.map((row: { xcoordinate: number, ycoordinate: number, zcoordinate: number, id: string, imagepath: string }) => ({
                         x: row.xcoordinate,
                         y: row.ycoordinate,
                         z: row.zcoordinate,
-                        id: row.id
+                        id: row.id,
+                        path: row.imagepath
+
                     }));
 
                     setCoordinates(prev => [...prev, ...newCoordinates]);
@@ -148,6 +151,7 @@ const Page: React.FC = () => {
             const pin = new THREE.Mesh(pinGeometry, pinMaterial);
             pin.position.set(coord.x, coord.y, coord.z);
             pin.userData.customId = coord.id
+            pin.userData.customPath = coord.path
             scene.add(pin);
             pins.push(pin);
             //console.log(coord.x, coord.y, coord.z, coord.id);
@@ -173,15 +177,17 @@ const Page: React.FC = () => {
             const intersects = raycaster.intersectObjects(scene.children, true);
 
             if (intersects.length > 0) {
-                //オブジェクトを検出
-                const object = intersects[0].object;
-                const intersect = intersects[0];
-                if (pins.includes(object)) {
-                    const pin_id: string = object.userData.customId;
-                    //console.log(object.userData.customId);
-                    setPin_id(object.userData.customId);
+                const intersectedObject = intersects[0].object;
+
+
+                if (pins.includes(intersectedObject)) {
+                    setPin_id(intersectedObject.userData.customId);
+                    setPin_path(intersectedObject.userData.customPath);
                 }
+
             }
+
+
         }
         addModelClickListener();
         renderer.domElement.addEventListener('click', onModelClick, false);
@@ -192,7 +198,7 @@ const Page: React.FC = () => {
                 <canvas id="canvas" ref={canvasRef}></canvas>
             </div>
             <div className={styles.images}>
-                <DisplayImage pinId={pin_id} />
+                <DisplayImage pinId={pin_id} imagePath={pin_path} />
             </div>
         </div>
     )
