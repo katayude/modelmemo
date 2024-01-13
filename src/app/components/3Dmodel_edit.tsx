@@ -6,7 +6,11 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/Addons.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
-const Page: React.FC = () => {
+type ThreeDmodelProps = {
+    roomid: number;
+};
+
+const Page: React.FC<ThreeDmodelProps> = ({ roomid }) => {
     let canvas: HTMLCanvasElement
 
     //ピンをデータベースに登録するapiを呼び出す関数
@@ -179,7 +183,7 @@ const Page: React.FC = () => {
                 const x = pin.position.x;
                 const y = pin.position.y;
                 const z = pin.position.z;
-                const model3did = 1;
+                const model3did = roomid;
 
 
                 console.log("x:" + x);
