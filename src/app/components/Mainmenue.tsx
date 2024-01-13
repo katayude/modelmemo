@@ -40,7 +40,7 @@ const Mainmenue: React.FC = () => {
         <div>
 
             {Sitetable.map((site) => (
-                <Link key={site.id} href={`/product_home/${site.id}`} passHref>
+                <Link key={site.id} href={`/product_room/${site.id}`} passHref>
                     <div style={GenbaListStyle}>
                         <Genbalist
                             building={site.building}

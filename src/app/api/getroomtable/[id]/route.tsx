@@ -13,7 +13,12 @@ export async function GET(request: Request, { params }: { params: { id: number }
 
         // SQLクエリでsiteidを使用する
         const result =
-            await sql`SELECT * FROM roomtable WHERE siteid = ${siteid};`;
+            await sql`
+            SELECT roomtable.*, roomimage.imagepath
+            FROM roomtable
+            INNER JOIN roomimage
+            ON roomtable.id = roomimage.roomid
+            WHERE roomtable.Siteid = ${siteid};`;
         return NextResponse.json({ result }, { status: 200 });
     } catch (error) {
         return NextResponse.json({ error }, { status: 500 });

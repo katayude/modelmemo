@@ -3,12 +3,12 @@ import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
     try {
-        // SitetableとPhototableを結合し、条件に一致するレコードを取得する
+        // Sitetableとgenbaimageを結合し、条件に一致するレコードを取得する
         const result = await sql`
-            SELECT Sitetable.*, PhotoTable.imagepath 
+            SELECT Sitetable.*, genbaimage.imagepath
             FROM Sitetable
-            JOIN PhotoTable ON Sitetable.id = PhotoTable.pinid;
-        `;
+            INNER JOIN genbaimage
+            ON Sitetable.id = genbaimage.id`;
         return NextResponse.json({ result }, { status: 200 });
     } catch (error) {
         return NextResponse.json({ error }, { status: 500 });

@@ -1,0 +1,36 @@
+.topmenue {
+    padding: 0;
+}
+
+.contents {
+    padding: 0;
+    position: relative;
+    top: 80px;
+    margin-left: 50px;
+    margin-bottom: 30px;
+}
+
+.model {
+    display: flex;
+    padding: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.arrows {
+    display: flex;
+    padding: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.img {
+    width: 9%;
+    height: auto;
+    margin-top: 3%;
+    margin-right: 5%;
+}
+
+.link {
+    width: 100%;
+}

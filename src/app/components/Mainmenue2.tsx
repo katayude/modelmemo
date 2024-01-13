@@ -6,7 +6,7 @@ import Roomlist from '@/app/components/Roomlist';
 import React, { useEffect, useState } from 'react';
 
 type Mainmenue2props = {
-    roomid: number;
+    genbaid: number;
 };
 
 type Roomtable = {
@@ -17,16 +17,17 @@ type Roomtable = {
     model3did: string;
     siteid: number;
     id: number;
+    imagepath: string;
 };
 
 
-const Mainmenue2: React.FC<Mainmenue2props> = ({ roomid }) => {
+const Mainmenue2: React.FC<Mainmenue2props> = ({ genbaid }) => {
     const [RoomTable, setRoomTable] = useState<Roomtable[]>([]);
 
     useEffect(() => {
         async function fetchData() {
             // 文字列テンプレートリテラルを使用して、動的にURLを生成
-            const response = await fetch(`/api/getroomtable/${roomid}`, {
+            const response = await fetch(`/api/getroomtable/${genbaid}`, {
                 method: 'GET',
                 headers: {
                     'Cache-Control': 'no-cache',
@@ -41,7 +42,7 @@ const Mainmenue2: React.FC<Mainmenue2props> = ({ roomid }) => {
         }
 
         fetchData();
-    }, [roomid]);
+    }, [genbaid]);
 
     return (
         <div>
@@ -53,11 +54,12 @@ const Mainmenue2: React.FC<Mainmenue2props> = ({ roomid }) => {
                     personInCharge='山口'
                     Model='あとで'
                     roomid={1}
+                    imagepath="yutaka.png"
                 />
             </div>
 
             {RoomTable.map((site) => (
-                <Link key={site.id} href={`/product_3Dview`} passHref>
+                <Link key={site.id} href={`/product_3Dview/${site.id}`} passHref>
                     <div key={site.id} style={roomListStyle}> {/* ここで `site.id` を `key` として使用 */}
                         <Roomlist
                             Construction_Phase={site.constructionphase}
@@ -65,6 +67,7 @@ const Mainmenue2: React.FC<Mainmenue2props> = ({ roomid }) => {
                             personInCharge={site.location}
                             Model={"3Dモデル"}
                             roomid={site.id}
+                            imagepath={site.imagepath}
                         />
                     </div>
                 </Link>
