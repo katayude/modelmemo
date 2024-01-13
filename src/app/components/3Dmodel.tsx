@@ -88,7 +88,9 @@ const Page: React.FC = () => {
             1000
         );
         //initial camera position
-        camera.position.z = 5;
+        camera.position.x = 1;
+        camera.position.y = 1;
+        camera.position.z = 1;
 
         //OrbitControlsの導入
         const controls = new OrbitControls(camera, renderer.domElement)
@@ -97,7 +99,7 @@ const Page: React.FC = () => {
         //load 3d model
         const loader = new GLTFLoader();
         loader.load(
-            '/3dModel/rikei.glb',
+            '/3dModel/genba.glb',
             function (gltf) {
                 scene.add(gltf.scene);
 
@@ -203,7 +205,6 @@ const Page: React.FC = () => {
 
         }
         addModelClickListener();
-        renderer.domElement.addEventListener('click', onModelClick, false);
     }, [coordinates])
 
     return (
