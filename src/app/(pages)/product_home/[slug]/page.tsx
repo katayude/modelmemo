@@ -16,7 +16,7 @@ const Page: React.FC<PageProps> = ({ params }) => {
                 <Sidemenue />
                 <div style={mainMenuStyle}>
                     <Mainmenue2
-                        roomid={Number(params.slug)}
+                        genbaid={Number(params.slug)}
                     />
                 </div>
             </div>
