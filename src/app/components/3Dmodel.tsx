@@ -236,7 +236,7 @@ const Page: React.FC<ThreeDmodelProps> = ({ roomid }) => {
 
         }
         addModelClickListener();
-    }, [threedpath])
+    }, [threedpath, coordinates])
 
     return (
         <div className={styles.container}>
