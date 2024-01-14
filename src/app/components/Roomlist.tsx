@@ -18,8 +18,8 @@ const Roomlist: React.FC<RoomlistProps> = ({ Construction_Phase, Created_Date, p
         <div className="wrapper" style={wrapperStyle}>
             <div className="info" style={infoStyle}>
                 <p>施工段階：{Construction_Phase}</p>
-                <p>作成日：{Created_Date}</p>
-                <p>担当者：{personInCharge}</p>
+                <p>担当者：{Created_Date}</p>
+                <p>ルーム：{personInCharge}</p>
                 <p>3Dモデル:{Model}</p>
             </div>
             <div className="photo" style={photoStyle}>

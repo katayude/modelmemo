@@ -50,8 +50,7 @@ const photoStyle = {
   width: '150px', // 写真の幅を大きくする
   height: '150px', // 写真の高さを大きくする
   margin: '10px', // 余白を調整
-  border: '1px solid grey', // 灰色の細いボーダー
-  borderRadius: '5px', // 角を少し丸くする
+
   overflow: 'hidden', // 内部の要素が枠からはみ出さないようにする
 };
 

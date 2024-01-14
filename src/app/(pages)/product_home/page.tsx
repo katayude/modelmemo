@@ -19,10 +19,9 @@ const pageStyle = {
     background: '#333',
     color: 'white',
     textAlign: 'center' as 'center',
-
 };
 const mainMenuStyle = {
-    width: '80%'
+    width: '80%',
 };
 
 export default Page;
