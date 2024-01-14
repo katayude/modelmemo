@@ -24,7 +24,7 @@ const Roomlist: React.FC<RoomlistProps> = ({ Construction_Phase, Created_Date, p
             </div>
             <div className="photo" style={photoStyle}>
                 <div className="photoImg">
-                    <Image src={`/images/${imagepath}`} alt="Room Image" width={100} height={100} />
+                    <Image src={`/images/${imagepath}`} alt="Room Image" width={300} height={200} />
                 </div>
             </div>
         </div>
