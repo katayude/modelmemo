@@ -71,7 +71,6 @@ const aiconstyle = {
 }
 const GenbaListStyle = {
     margin: '1rem',
-
 }
 export default Mainmenue;
 

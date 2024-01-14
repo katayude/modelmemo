@@ -19,7 +19,7 @@ const Genbalist: React.FC<Genbalistprops> = ({ building, location, personInCharg
       </div>
       <div className="photo" style={photoStyle}>
         <div className="photoImg">
-          <Image src={`/images/${imagepath}`} alt="logo" width={200} height={200} />
+          <Image src={`/images/${imagepath}`} alt="logo" width={300} height={200} />
         </div>
       </div>
     </div>
@@ -47,8 +47,8 @@ const infoStyle = {
 };
 
 const photoStyle = {
-  width: '150px', // 写真の幅を大きくする
-  height: '150px', // 写真の高さを大きくする
+  width: '300px', // 写真の幅を大きくする
+  height: '200px', // 写真の高さを大きくする
   margin: '10px', // 余白を調整
 
   overflow: 'hidden', // 内部の要素が枠からはみ出さないようにする

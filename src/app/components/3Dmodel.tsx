@@ -225,7 +225,7 @@ const Page: React.FC<ThreeDmodelProps> = ({ roomid }) => {
                     selectedObject = intersectedObject;
 
                     const material02 = intersectedObject.material as THREE.MeshBasicMaterial;
-                    material02.color.set('black');//色を変更する
+                    material02.color.set('green');//色を変更する
                     material02.needsUpdate = true;
                     scene.add(intersectedObject);
                     setPin_id(intersectedObject.userData.customId);

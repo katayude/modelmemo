@@ -54,7 +54,7 @@ const Mainmenue2: React.FC<Mainmenue2props> = ({ genbaid }) => {
                             Construction_Phase={site.constructionphase}
                             Created_Date={site.coordinator}
                             personInCharge={site.location}
-                            Model={"表示"}
+                            Model={"3D"}
                             roomid={site.id}
                             imagepath={site.imagepath}
                         />
