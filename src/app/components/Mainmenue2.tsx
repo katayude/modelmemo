@@ -47,17 +47,6 @@ const Mainmenue2: React.FC<Mainmenue2props> = ({ genbaid }) => {
     return (
         <div>
 
-            <div style={roomListStyle}>
-                <Roomlist
-                    Construction_Phase='配線'
-                    Created_Date='12/5'
-                    personInCharge='山口'
-                    Model='あとで'
-                    roomid={1}
-                    imagepath="yutaka.png"
-                />
-            </div>
-
             {RoomTable.map((site) => (
                 <Link key={site.id} href={`/product_3Dview/${site.id}`} passHref>
                     <div key={site.id} style={roomListStyle}> {/* ここで `site.id` を `key` として使用 */}
